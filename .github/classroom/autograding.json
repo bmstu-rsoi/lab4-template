@@ -1,13 +1,13 @@
 {
   "tests": [
     {
-      "name": "Run Postman",
+      "name": "Run Test Script",
       "setup": "",
-      "run": "newman run -e <variant>/postman/environment.json <variant>/postman/collection.json",
+      "run": "./scripts/test-script.sh <variant> <deployment> <gateway url> <k8s namespace>",
       "input": "",
       "output": "",
       "comparison": "included",
-      "timeout": 10,
+      "timeout": 60,
       "points": 10
     }
   ]

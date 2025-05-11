@@ -1,38 +1,35 @@
 name: GitHub Classroom Workflow
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
 jobs:
   build:
     name: Autograding
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
       - uses: docker/setup-buildx-action@v2
 
-      # TODO build, publish to docker hub, deploy to k8s
+      # TODO build and run unit tests
 
-      - name: Run API Tests
-        uses: matt-ball/newman-action@master
-        with:
-          collection: <variant>/postman/collection.json
-          environment: <variant>/postman/environment.json
-          delayRequest: 100
-          reporters: '[ "cli" ]'
+      - name: Build images
+        timeout-minutes: 10
+        run: docker compose build --push
 
-      - uses: education/autograding@v1
-        id: autograder
+      # TODO deploy to k8s with liveness and readyness probes
+
+      - name: Wait before services are ready
+        run: kubectl wait -n test -l app.kubernetes.io/name=gateway pod --for=condition=Ready --timeout 3m
+      
+      # TODO setup parameters in classroom/autograding.json
+      
+      - name: Autograding
+        uses: education/autograding@v1
         continue-on-error: true
-
-      - name: Github auto grader mark
-        uses: Romanow/google-sheet-autograder-marker@v1.0
-        with:
-          google_token: ${{secrets.GOOGLE_API_KEY}}
-          sheet_id: "1xkgjUX6Qmk7rdJG-QPOToav-HWWtthJjnShIKnw3oIY"
-          homework_number: 4
-          user_column: 'D'
-          column_offset: 'F'
-          mark: "'+"

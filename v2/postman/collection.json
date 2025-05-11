@@ -1,15 +1,16 @@
 {
 	"info": {
-		"_postman_id": "8a9acd76-c928-407b-92fd-318781409305",
+		"_postman_id": "2d5699fc-0104-4b8c-9947-79cdadd1b063",
 		"name": "[rsoi][lab4] Hotels Booking System",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "976707"
 	},
 	"item": [
 		{
-			"name": "Gateway API",
+			"name": "success",
 			"item": [
 				{
-					"name": "Получить список отелей",
+					"name": "[success] Получить список отелей",
 					"event": [
 						{
 							"listen": "test",
@@ -20,7 +21,7 @@
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
 									"    const pageSize = Number(pm.request.url.query.get(\"size\"))",
-									"    const hotelUid = pm.collectionVariables.get(\"hotelUid\")",
+									"    const hotelUid = pm.environment.get(\"hotelUid\")",
 									"    ",
 									"    const response = pm.response.json();    ",
 									"    pm.expect(response.items).to.be.an(\"array\")",
@@ -37,7 +38,7 @@
 									"    pm.expect(hotel.address).to.eq(\"Неглинная ул., 4\")",
 									"    pm.expect(hotel.stars).to.be.eq(5)",
 									"    pm.expect(hotel.price).to.be.eq(10000)",
-									"    pm.collectionVariables.set(\"hotelPrice\", hotel.price)",
+									"    pm.environment.set(\"hotelPrice\", hotel.price)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -112,7 +113,7 @@
 					]
 				},
 				{
-					"name": "Получить информацию о статусе в программе лояльности",
+					"name": "[success] Получить информацию о статусе в программе лояльности",
 					"event": [
 						{
 							"listen": "test",
@@ -125,9 +126,9 @@
 									"    const response = pm.response.json();",
 									"    pm.expect(response.status).to.not.empty",
 									"    pm.expect(response.discount).to.be.not.undefined",
-									"    pm.collectionVariables.set(\"discount\", response.discount)",
+									"    pm.environment.set(\"discount\", response.discount)",
 									"    pm.expect(response.reservationCount).to.be.not.undefined",
-									"    pm.collectionVariables.set(\"reservationCount\", response.reservationCount)",
+									"    pm.environment.set(\"reservationCount\", response.reservationCount)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -194,7 +195,7 @@
 					]
 				},
 				{
-					"name": "Забронировать отель",
+					"name": "[success] Забронировать отель",
 					"event": [
 						{
 							"listen": "test",
@@ -206,9 +207,9 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const hotelUid = pm.collectionVariables.get(\"hotelUid\")",
-									"    const hotelPrice = pm.collectionVariables.get(\"hotelPrice\")",
-									"    const discount = pm.collectionVariables.get(\"discount\")",
+									"    const hotelUid = pm.environment.get(\"hotelUid\")",
+									"    const hotelPrice = pm.environment.get(\"hotelPrice\")",
+									"    const discount = pm.environment.get(\"discount\")",
 									"",
 									"    const response = pm.response.json();",
 									"    const request = JSON.parse(pm.request.body.raw)",
@@ -225,9 +226,9 @@
 									"    const price = hotelPrice * days",
 									"    pm.expect(response.payment.price).to.be.eq(price - (price * discount / 100.0))",
 									"",
-									"    pm.collectionVariables.set(\"startDate\", request.startDate)",
-									"    pm.collectionVariables.set(\"endDate\", request.endDate)",
-									"    pm.collectionVariables.set(\"reservationUid\", response.reservationUid)",
+									"    pm.environment.set(\"startDate\", request.startDate)",
+									"    pm.environment.set(\"endDate\", request.endDate)",
+									"    pm.environment.set(\"reservationUid\", response.reservationUid)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -317,7 +318,7 @@
 					]
 				},
 				{
-					"name": "Информация по конкретному бронированию",
+					"name": "[success] Информация по конкретному бронированию",
 					"event": [
 						{
 							"listen": "test",
@@ -329,12 +330,12 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const hotelUid = pm.collectionVariables.get(\"hotelUid\")",
-									"    const reservationUid = pm.collectionVariables.get(\"reservationUid\")",
-									"    const hotelPrice = pm.collectionVariables.get(\"hotelPrice\")",
-									"    const startDate = pm.collectionVariables.get(\"startDate\")",
-									"    const endDate = pm.collectionVariables.get(\"endDate\")",
-									"    const discount = pm.collectionVariables.get(\"discount\")",
+									"    const hotelUid = pm.environment.get(\"hotelUid\")",
+									"    const reservationUid = pm.environment.get(\"reservationUid\")",
+									"    const hotelPrice = pm.environment.get(\"hotelPrice\")",
+									"    const startDate = pm.environment.get(\"startDate\")",
+									"    const endDate = pm.environment.get(\"endDate\")",
+									"    const discount = pm.environment.get(\"discount\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response.reservationUid).to.be.eq(reservationUid)",
@@ -433,7 +434,7 @@
 					]
 				},
 				{
-					"name": "Информация по всем бронированиям пользователя",
+					"name": "[success] Информация по всем бронированиям пользователя",
 					"event": [
 						{
 							"listen": "test",
@@ -445,12 +446,12 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const hotelUid = pm.collectionVariables.get(\"hotelUid\")",
-									"    const reservationUid = pm.collectionVariables.get(\"reservationUid\")",
-									"    const hotelPrice = pm.collectionVariables.get(\"hotelPrice\")",
-									"    const startDate = pm.collectionVariables.get(\"startDate\")",
-									"    const endDate = pm.collectionVariables.get(\"endDate\")",
-									"    const discount = pm.collectionVariables.get(\"discount\")",
+									"    const hotelUid = pm.environment.get(\"hotelUid\")",
+									"    const reservationUid = pm.environment.get(\"reservationUid\")",
+									"    const hotelPrice = pm.environment.get(\"hotelPrice\")",
+									"    const startDate = pm.environment.get(\"startDate\")",
+									"    const endDate = pm.environment.get(\"endDate\")",
+									"    const discount = pm.environment.get(\"discount\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response).to.be.an(\"array\")",
@@ -536,7 +537,7 @@
 					]
 				},
 				{
-					"name": "Информация о пользователе",
+					"name": "[success] Информация о пользователе",
 					"event": [
 						{
 							"listen": "test",
@@ -548,12 +549,12 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const hotelUid = pm.collectionVariables.get(\"hotelUid\")",
-									"    const reservationUid = pm.collectionVariables.get(\"reservationUid\")",
-									"    const hotelPrice = pm.collectionVariables.get(\"hotelPrice\")",
-									"    const startDate = pm.collectionVariables.get(\"startDate\")",
-									"    const endDate = pm.collectionVariables.get(\"endDate\")",
-									"    const discount = pm.collectionVariables.get(\"discount\")",
+									"    const hotelUid = pm.environment.get(\"hotelUid\")",
+									"    const reservationUid = pm.environment.get(\"reservationUid\")",
+									"    const hotelPrice = pm.environment.get(\"hotelPrice\")",
+									"    const startDate = pm.environment.get(\"startDate\")",
+									"    const endDate = pm.environment.get(\"endDate\")",
+									"    const discount = pm.environment.get(\"discount\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response.reservations).to.be.not.undefined",
@@ -644,7 +645,7 @@
 					]
 				},
 				{
-					"name": "Получить информацию о статусе в программе лояльности после бронирования",
+					"name": "[success] Получить информацию о статусе в программе лояльности после бронирования",
 					"event": [
 						{
 							"listen": "test",
@@ -654,7 +655,7 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const reservationCount = pm.collectionVariables.get(\"reservationCount\")",
+									"    const reservationCount = pm.environment.get(\"reservationCount\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response.status).to.not.empty",
@@ -726,7 +727,7 @@
 					]
 				},
 				{
-					"name": "Отменить бронирование",
+					"name": "[success] Отменить бронирование",
 					"event": [
 						{
 							"listen": "test",
@@ -821,8 +822,720 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.collectionVariables.set(\"hotelUid\", \"049161bb-badd-4fa8-9d90-87c9a82b0668\")",
-							"pm.collectionVariables.set(\"username\", \"Test Max\")"
+							"pm.environment.set(\"hotelUid\", \"049161bb-badd-4fa8-9d90-87c9a82b0668\")",
+							"pm.environment.set(\"username\", \"Test Max\")"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "failover",
+			"item": [
+				{
+					"name": "step1",
+					"item": [
+						{
+							"name": "[failover] Получить список отелей",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Получение списка отелей\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const pageSize = Number(pm.request.url.query.get(\"size\"))",
+											"    const hotelUid = pm.environment.get(\"hotelUid\")",
+											"    ",
+											"    const response = pm.response.json();    ",
+											"    pm.expect(response.items).to.be.an(\"array\")",
+											"    pm.expect(response.page).to.be.not.undefined",
+											"    pm.expect(response.pageSize).to.be.lte(pageSize)",
+											"    pm.expect(response.totalElements).to.be.not.undefined",
+											"",
+											"    const hotel = _.find(response.items, { \"hotelUid\": hotelUid })",
+											"    pm.expect(hotel).to.be.not.undefined",
+											"    pm.expect(hotel.hotelUid).to.eq(hotelUid)",
+											"    pm.expect(hotel.name).to.eq(\"Ararat Park Hyatt Moscow\")",
+											"    pm.expect(hotel.country).to.eq(\"Россия\")",
+											"    pm.expect(hotel.city).to.eq(\"Москва\")",
+											"    pm.expect(hotel.address).to.eq(\"Неглинная ул., 4\")",
+											"    pm.expect(hotel.stars).to.be.eq(5)",
+											"    pm.expect(hotel.price).to.be.eq(10000)",
+											"    pm.environment.set(\"hotelPrice\", hotel.price)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/hotels?page=1&size=10",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"hotels"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Получить информацию о статусе в программе лояльности",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Получение информации о статусе в программе лояльности\", () => {",
+											"    pm.response.to.have.status(503)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"    ",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.message).to.be.eq(\"Loyalty Service unavailable\")",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loyalty",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loyalty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Информация о пользователе",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Получение информации о пользователе\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.reservations).to.be.an(\"array\")",
+											"    pm.expect(response.loyalty).to.be.empty",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/me",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"me"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Забронировать отель",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Забронировать отель\", () => {",
+											"    pm.response.to.have.status(503)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"    ",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.message).to.be.eq(\"Loyalty Service unavailable\")",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"hotelUid\": \"{{hotelUid}}\",\n    \"startDate\": \"2021-10-08\",\n    \"endDate\": \"2021-10-11\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/reservations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn off Loyalty Service"
+				},
+				{
+					"name": "step2",
+					"item": [
+						{
+							"name": "[failover] Получить информацию о статусе в программе лояльности",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Получение информации о статусе в программе лояльности\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.status).to.not.empty",
+											"    pm.expect(response.discount).to.be.not.undefined",
+											"    pm.environment.set(\"discount\", response.discount)",
+											"    pm.expect(response.reservationCount).to.be.not.undefined",
+											"    pm.environment.set(\"reservationCount\", response.reservationCount)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(() => {}, 30000);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loyalty",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loyalty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Забронировать отель",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Забронировать отель\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const hotelUid = pm.environment.get(\"hotelUid\")",
+											"    const hotelPrice = pm.environment.get(\"hotelPrice\")",
+											"    const discount = pm.environment.get(\"discount\")",
+											"",
+											"    const response = pm.response.json();",
+											"    const request = JSON.parse(pm.request.body.raw)",
+											"",
+											"    pm.expect(response.reservationUid).to.be.not.undefined",
+											"    pm.expect(response.hotelUid).to.be.eq(hotelUid)",
+											"    pm.expect(response.startDate).to.be.eq(request.startDate)",
+											"    pm.expect(response.endDate).to.be.eq(request.endDate)",
+											"    pm.expect(response.discount).to.be.eq(discount)",
+											"    pm.expect(response.status).to.be.eq(\"PAID\")",
+											"    pm.expect(response.payment).to.be.not.undefined",
+											"    pm.expect(response.payment.status).to.be.eq(\"PAID\")",
+											"    const days = Math.abs(moment(request.startDate).diff(moment(request.endDate), \"days\"))",
+											"    const price = hotelPrice * days",
+											"    pm.expect(response.payment.price).to.be.eq(price - (price * discount / 100.0))",
+											"",
+											"    pm.environment.set(\"startDate\", request.startDate)",
+											"    pm.environment.set(\"endDate\", request.endDate)",
+											"    pm.environment.set(\"reservationUid\", response.reservationUid)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"hotelUid\": \"{{hotelUid}}\",\n    \"startDate\": \"2021-10-08\",\n    \"endDate\": \"2021-10-11\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/reservations",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Информация по конкретному бронированию",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Получение информации о конкретном бронировании\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const hotelUid = pm.environment.get(\"hotelUid\")",
+											"    const reservationUid = pm.environment.get(\"reservationUid\")",
+											"    const hotelPrice = pm.environment.get(\"hotelPrice\")",
+											"    const startDate = pm.environment.get(\"startDate\")",
+											"    const endDate = pm.environment.get(\"endDate\")",
+											"    const discount = pm.environment.get(\"discount\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.reservationUid).to.be.eq(reservationUid)",
+											"    pm.expect(response.hotel).to.be.not.undefined",
+											"    pm.expect(response.hotel.hotelUid).to.be.eq(hotelUid)",
+											"    pm.expect(response.hotel.name).to.be.eq(\"Ararat Park Hyatt Moscow\")",
+											"    pm.expect(response.hotel.fullAddress).to.be.eq(\"Россия, Москва, Неглинная ул., 4\")",
+											"    pm.expect(response.hotel.stars).to.be.eq(5)",
+											"    pm.expect(response.startDate).to.be.eq(startDate)",
+											"    pm.expect(response.endDate).to.be.eq(endDate)",
+											"    pm.expect(response.status).to.be.eq(\"PAID\")",
+											"    pm.expect(response.payment).to.be.not.undefined",
+											"    pm.expect(response.payment.status).to.be.eq(\"PAID\")",
+											"    ",
+											"    const days = Math.abs(moment(startDate).diff(moment(endDate), \"days\"))",
+											"    const price = hotelPrice * days",
+											"    pm.expect(response.payment.price).to.be.eq(price - (price * discount / 100.0))",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/reservations/:reservationUid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations",
+										":reservationUid"
+									],
+									"variable": [
+										{
+											"key": "reservationUid",
+											"value": "{{reservationUid}}",
+											"description": "UUID бронирования"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Получить информацию о статусе в программе лояльности после бронирования",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Получение информации о статусе в программе лояльности\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const reservationCount = pm.environment.get(\"reservationCount\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.status).to.not.empty",
+											"    pm.expect(response.discount).to.be.not.undefined",
+											"    pm.expect(response.reservationCount).to.be.eq(reservationCount + 1)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loyalty",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loyalty"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn on Loyalty Service"
+				},
+				{
+					"name": "step3",
+					"item": [
+						{
+							"name": "[failover] Получить информацию о статусе в программе лояльности",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Получение информации о статусе в программе лояльности\", () => {",
+											"    pm.response.to.have.status(503)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"    ",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.message).to.be.eq(\"Loyalty Service unavailable\")",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loyalty",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loyalty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Отменить бронирование",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Отменить бронирование\", () => {",
+											"    pm.response.to.have.status(204)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/reservations/:reservationUid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations",
+										":reservationUid"
+									],
+									"variable": [
+										{
+											"key": "reservationUid",
+											"value": "{{reservationUid}}",
+											"description": "UUID бронирования"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn off Loyalty Service"
+				},
+				{
+					"name": "step4",
+					"item": [
+						{
+							"name": "[failover] Получить информацию о статусе в программе лояльности после отмены бронирования",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Получение информации о статусе в программе лояльности\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const reservationCount = pm.environment.get(\"reservationCount\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.status).to.not.empty",
+											"    pm.expect(response.discount).to.be.not.undefined",
+											"    pm.expect(response.reservationCount).to.be.eq(reservationCount)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(() => {}, 30000);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/loyalty",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"loyalty"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Информация по конкретному бронированию",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Получение информации о конкретном бронировании\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const hotelUid = pm.environment.get(\"hotelUid\")",
+											"    const reservationUid = pm.environment.get(\"reservationUid\")",
+											"    const hotelPrice = pm.environment.get(\"hotelPrice\")",
+											"    const startDate = pm.environment.get(\"startDate\")",
+											"    const endDate = pm.environment.get(\"endDate\")",
+											"    const discount = pm.environment.get(\"discount\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.reservationUid).to.be.eq(reservationUid)",
+											"    pm.expect(response.hotel).to.be.not.undefined",
+											"    pm.expect(response.hotel.hotelUid).to.be.eq(hotelUid)",
+											"    pm.expect(response.hotel.name).to.be.eq(\"Ararat Park Hyatt Moscow\")",
+											"    pm.expect(response.hotel.fullAddress).to.be.eq(\"Россия, Москва, Неглинная ул., 4\")",
+											"    pm.expect(response.hotel.stars).to.be.eq(5)",
+											"    pm.expect(response.startDate).to.be.eq(startDate)",
+											"    pm.expect(response.endDate).to.be.eq(endDate)",
+											"    pm.expect(response.status).to.be.eq(\"CANCELED\")",
+											"    pm.expect(response.payment).to.be.not.undefined",
+											"    pm.expect(response.payment.status).to.be.eq(\"CANCELED\")",
+											"    ",
+											"    const days = Math.abs(moment(startDate).diff(moment(endDate), \"days\"))",
+											"    const price = hotelPrice * days",
+											"    pm.expect(response.payment.price).to.be.eq(price - (price * discount / 100.0))",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/reservations/:reservationUid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"reservations",
+										":reservationUid"
+									],
+									"variable": [
+										{
+											"key": "reservationUid",
+											"value": "{{reservationUid}}",
+											"description": "UUID бронирования"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn on Loyalty Service"
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set(\"hotelUid\", \"049161bb-badd-4fa8-9d90-87c9a82b0668\")",
+							"pm.environment.set(\"username\", \"Test Max\")"
 						]
 					}
 				},
@@ -841,7 +1554,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": ""
+			"value": "http://localhost:8080"
 		},
 		{
 			"key": "hotelUid",
