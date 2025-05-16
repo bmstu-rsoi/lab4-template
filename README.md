@@ -47,9 +47,9 @@ Kubernetes Cluster, т.е. готовый кластер k8s, предостав
    ```shell
    # запуск тестового сценария:
    # * <variant> – номер варианта (v1 | v2 | v3 | v4 )
-   # * <service> – имя сервиса в Docker Compose
-   # * <port>    – порт, на котором запущен сервис
-   $ scripts/test-script.sh <variant> <service> <port>
+   # * <deployment> – имя deployment в кластере k8s
+   # * <namespace>    – namespace кластера, в котором развёрнуты сервисы (по умолчанию default)
+   $ ./scripts/test-script.sh <variant> <deployment> <k8s namespace>
    ```
 
 ### Прием задания

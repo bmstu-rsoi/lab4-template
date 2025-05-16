@@ -4,8 +4,7 @@ set -e
 
 variant=${1:-${VARIANT}}
 deployment=${2:-${DEPLOYMENT_NAME}}
-gateway_url=${3:-${GATEWAY_URL}}
-namespace=${4:-${NAMESPACE}}
+namespace=${3:-${NAMESPACE}}
 
 [[ -z $namespace ]] && namespace="default"
 
