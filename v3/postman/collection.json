@@ -1,15 +1,16 @@
 {
 	"info": {
-		"_postman_id": "9a2dd82a-078d-4c32-bff5-48c6f2b00a5c",
+		"_postman_id": "0991b977-caed-4aee-a39a-5a39980b12a3",
 		"name": "[rsoi][lab4] Car Rental System",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "976707"
 	},
 	"item": [
 		{
-			"name": "Gateway API",
+			"name": "success",
 			"item": [
 				{
-					"name": "Получить список всех доступных для бронирования автомобилей",
+					"name": "[success] Получить список всех доступных для бронирования автомобилей",
 					"event": [
 						{
 							"listen": "test",
@@ -20,7 +21,7 @@
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
 									"    const pageSize = Number(pm.request.url.query.get(\"size\"))",
-									"    const carUid = pm.collectionVariables.get(\"carUid\")",
+									"    const carUid = pm.environment.get(\"carUid\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response.items).to.be.an(\"array\")",
@@ -38,7 +39,7 @@
 									"    pm.expect(car.price).to.be.eq(3500)",
 									"    pm.expect(car.available).to.be.true",
 									"",
-									"    pm.collectionVariables.set(\"rentalPrice\", car.price)",
+									"    pm.environment.set(\"rentalPrice\", car.price)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -121,7 +122,7 @@
 					]
 				},
 				{
-					"name": "Забронировать автомобиль",
+					"name": "[success] Забронировать автомобиль",
 					"event": [
 						{
 							"listen": "test",
@@ -133,8 +134,8 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const carUid = pm.collectionVariables.get(\"carUid\")",
-									"    const rentalPrice = pm.collectionVariables.get(\"rentalPrice\")",
+									"    const carUid = pm.environment.get(\"carUid\")",
+									"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
 									"",
 									"    const response = pm.response.json();",
 									"    const request = JSON.parse(pm.request.body.raw)",
@@ -152,9 +153,9 @@
 									"    const days = Math.abs(dateFrom.diff(dateTo, \"days\"))",
 									"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
 									"",
-									"    pm.collectionVariables.set(\"dateFrom\", request.dateFrom)",
-									"    pm.collectionVariables.set(\"dateTo\", request.dateTo)",
-									"    pm.collectionVariables.set(\"rentalUid\", response.rentalUid)",
+									"    pm.environment.set(\"dateFrom\", request.dateFrom)",
+									"    pm.environment.set(\"dateTo\", request.dateTo)",
+									"    pm.environment.set(\"rentalUid\", response.rentalUid)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -244,7 +245,7 @@
 					]
 				},
 				{
-					"name": "Информация по конкретной аренде пользователя",
+					"name": "[success] Информация по конкретной аренде пользователя",
 					"event": [
 						{
 							"listen": "test",
@@ -256,11 +257,11 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const carUid = pm.collectionVariables.get(\"carUid\")",
-									"    const rentalUid = pm.collectionVariables.get(\"rentalUid\")",
-									"    const dateFrom = pm.collectionVariables.get(\"dateFrom\")",
-									"    const dateTo = pm.collectionVariables.get(\"dateTo\")",
-									"    const rentalPrice = pm.collectionVariables.get(\"rentalPrice\")",
+									"    const carUid = pm.environment.get(\"carUid\")",
+									"    const rentalUid = pm.environment.get(\"rentalUid\")",
+									"    const dateFrom = pm.environment.get(\"dateFrom\")",
+									"    const dateTo = pm.environment.get(\"dateTo\")",
+									"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response.rentalUid).to.be.eq(rentalUid)",
@@ -280,7 +281,7 @@
 									"    const days = Math.abs(moment(dateFrom).diff(moment(dateTo), \"days\"))",
 									"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
 									"",
-									"    pm.collectionVariables.set(\"rentalUid\", response.rentalUid)",
+									"    pm.environment.set(\"rentalUid\", response.rentalUid)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -362,7 +363,7 @@
 					]
 				},
 				{
-					"name": "Получить информацию о всех арендах пользователя",
+					"name": "[success] Получить информацию о всех арендах пользователя",
 					"event": [
 						{
 							"listen": "test",
@@ -374,11 +375,11 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const carUid = pm.collectionVariables.get(\"carUid\")",
-									"    const rentalUid = pm.collectionVariables.get(\"rentalUid\")",
-									"    const dateFrom = pm.collectionVariables.get(\"dateFrom\")",
-									"    const dateTo = pm.collectionVariables.get(\"dateTo\")",
-									"    const rentalPrice = pm.collectionVariables.get(\"rentalPrice\")",
+									"    const carUid = pm.environment.get(\"carUid\")",
+									"    const rentalUid = pm.environment.get(\"rentalUid\")",
+									"    const dateFrom = pm.environment.get(\"dateFrom\")",
+									"    const dateTo = pm.environment.get(\"dateTo\")",
+									"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
 									"",
 									"    const response = pm.response.json();",
 									"    const rental = _.find(response, { \"rentalUid\": rentalUid })",
@@ -465,7 +466,7 @@
 					]
 				},
 				{
-					"name": "Отмена аренды автомобиля",
+					"name": "[success] Отмена аренды автомобиля",
 					"event": [
 						{
 							"listen": "test",
@@ -554,7 +555,7 @@
 					]
 				},
 				{
-					"name": "Информация по конкретной аренде пользователя",
+					"name": "[success] Информация по конкретной аренде пользователя",
 					"event": [
 						{
 							"listen": "test",
@@ -566,11 +567,11 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const carUid = pm.collectionVariables.get(\"carUid\")",
-									"    const rentalUid = pm.collectionVariables.get(\"rentalUid\")",
-									"    const dateFrom = pm.collectionVariables.get(\"dateFrom\")",
-									"    const dateTo = pm.collectionVariables.get(\"dateTo\")",
-									"    const rentalPrice = pm.collectionVariables.get(\"rentalPrice\")",
+									"    const carUid = pm.environment.get(\"carUid\")",
+									"    const rentalUid = pm.environment.get(\"rentalUid\")",
+									"    const dateFrom = pm.environment.get(\"dateFrom\")",
+									"    const dateTo = pm.environment.get(\"dateTo\")",
+									"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response.rentalUid).to.be.eq(rentalUid)",
@@ -590,7 +591,7 @@
 									"    const days = Math.abs(moment(dateFrom).diff(moment(dateTo), \"days\"))",
 									"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
 									"",
-									"    pm.collectionVariables.set(\"rentalUid\", response.rentalUid)",
+									"    pm.environment.set(\"rentalUid\", response.rentalUid)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -672,7 +673,7 @@
 					]
 				},
 				{
-					"name": "Забронировать автомобиль",
+					"name": "[success] Забронировать автомобиль",
 					"event": [
 						{
 							"listen": "test",
@@ -684,8 +685,8 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const carUid = pm.collectionVariables.get(\"carUid\")",
-									"    const rentalPrice = pm.collectionVariables.get(\"rentalPrice\")",
+									"    const carUid = pm.environment.get(\"carUid\")",
+									"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
 									"",
 									"    const response = pm.response.json();",
 									"    const request = JSON.parse(pm.request.body.raw)",
@@ -703,9 +704,9 @@
 									"    const days = Math.abs(dateFrom.diff(dateTo, \"days\"))",
 									"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
 									"",
-									"    pm.collectionVariables.set(\"dateFrom\", request.dateFrom)",
-									"    pm.collectionVariables.set(\"dateTo\", request.dateTo)",
-									"    pm.collectionVariables.set(\"rentalUid\", response.rentalUid)",
+									"    pm.environment.set(\"dateFrom\", request.dateFrom)",
+									"    pm.environment.set(\"dateTo\", request.dateTo)",
+									"    pm.environment.set(\"rentalUid\", response.rentalUid)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -795,7 +796,7 @@
 					]
 				},
 				{
-					"name": "Завершение аренды автомобиля",
+					"name": "[success] Завершение аренды автомобиля",
 					"event": [
 						{
 							"listen": "test",
@@ -886,7 +887,7 @@
 					]
 				},
 				{
-					"name": "Информация по конкретной аренде пользователя",
+					"name": "[success] Информация по конкретной аренде пользователя",
 					"event": [
 						{
 							"listen": "test",
@@ -898,11 +899,11 @@
 									"    pm.response.to.have.status(200)",
 									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
 									"",
-									"    const carUid = pm.collectionVariables.get(\"carUid\")",
-									"    const rentalUid = pm.collectionVariables.get(\"rentalUid\")",
-									"    const dateFrom = pm.collectionVariables.get(\"dateFrom\")",
-									"    const dateTo = pm.collectionVariables.get(\"dateTo\")",
-									"    const rentalPrice = pm.collectionVariables.get(\"rentalPrice\")",
+									"    const carUid = pm.environment.get(\"carUid\")",
+									"    const rentalUid = pm.environment.get(\"rentalUid\")",
+									"    const dateFrom = pm.environment.get(\"dateFrom\")",
+									"    const dateTo = pm.environment.get(\"dateTo\")",
+									"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
 									"",
 									"    const response = pm.response.json();",
 									"    pm.expect(response.rentalUid).to.be.eq(rentalUid)",
@@ -922,7 +923,7 @@
 									"    const days = Math.abs(moment(dateFrom).diff(moment(dateTo), \"days\"))",
 									"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
 									"",
-									"    pm.collectionVariables.set(\"rentalUid\", response.rentalUid)",
+									"    pm.environment.set(\"rentalUid\", response.rentalUid)",
 									"})"
 								],
 								"type": "text/javascript"
@@ -1010,8 +1011,549 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
-							"pm.collectionVariables.set(\"carUid\", \"109b42f3-198d-4c89-9276-a7520a7120ab\")",
-							"pm.collectionVariables.set(\"username\", \"Test Max\")"
+							"pm.environment.set(\"carUid\", \"109b42f3-198d-4c89-9276-a7520a7120ab\")",
+							"pm.environment.set(\"username\", \"Test Max\")"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "failover",
+			"item": [
+				{
+					"name": "step1",
+					"item": [
+						{
+							"name": "[failover] Получить список всех доступных для бронирования автомобилей",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Получить список всех доступных для бронирования автомобилей\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const pageSize = Number(pm.request.url.query.get(\"size\"))",
+											"    const carUid = pm.environment.get(\"carUid\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.items).to.be.an(\"array\")",
+											"    pm.expect(response.page).to.be.not.undefined",
+											"    pm.expect(response.pageSize).to.be.lte(pageSize)",
+											"    pm.expect(response.totalElements).to.be.not.undefined",
+											"",
+											"    const car = _.find(response.items, { \"carUid\": carUid })",
+											"    pm.expect(car).to.be.not.undefined",
+											"    pm.expect(car.carUid).to.eq(carUid)",
+											"    pm.expect(car.brand).to.eq(\"Mercedes Benz\")",
+											"    pm.expect(car.model).to.eq(\"GLA 250\")",
+											"    pm.expect(car.registrationNumber).to.be.eq(\"ЛО777Х799\")",
+											"    pm.expect(car.type).to.be.eq(\"SEDAN\")",
+											"    pm.expect(car.price).to.be.eq(3500)",
+											"    pm.expect(car.available).to.be.true",
+											"",
+											"    pm.environment.set(\"rentalPrice\", car.price)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/cars?page=1&size=10&showAll=false",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"cars"
+									],
+									"query": [
+										{
+											"key": "page",
+											"value": "1"
+										},
+										{
+											"key": "size",
+											"value": "10"
+										},
+										{
+											"key": "showAll",
+											"value": "false"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Забронировать автомобиль",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Забронировать автомобиль\", () => {",
+											"    pm.response.to.have.status(503)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"    ",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.message).to.be.eq(\"Payment Service unavailable\")",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"carUid\": \"{{carUid}}\",\n    \"dateFrom\": \"2021-10-08\",\n    \"dateTo\": \"2021-10-11\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/rental",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"rental"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn off Payment Service"
+				},
+				{
+					"name": "step2",
+					"item": [
+						{
+							"name": "[failover] Забронировать автомобиль",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Забронировать автомобиль\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const carUid = pm.environment.get(\"carUid\")",
+											"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
+											"",
+											"    const response = pm.response.json();",
+											"    const request = JSON.parse(pm.request.body.raw)",
+											"",
+											"    pm.expect(response.rentalUid).to.be.not.undefined",
+											"    pm.expect(response.carUid).to.be.eq(carUid)",
+											"    pm.expect(response.status).to.be.eq(\"IN_PROGRESS\")",
+											"    pm.expect(response.dateFrom).to.be.eq(request.dateFrom)",
+											"    pm.expect(response.dateTo).to.be.eq(request.dateTo)",
+											"    pm.expect(response.payment).to.be.not.undefined",
+											"    pm.expect(response.payment.paymentUid).to.be.not.undefined",
+											"    pm.expect(response.payment.status).to.be.eq(\"PAID\")",
+											"    const dateFrom = moment(request.dateFrom)",
+											"    const dateTo = moment(request.dateTo)",
+											"    const days = Math.abs(dateFrom.diff(dateTo, \"days\"))",
+											"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
+											"",
+											"    pm.environment.set(\"dateFrom\", request.dateFrom)",
+											"    pm.environment.set(\"dateTo\", request.dateTo)",
+											"    pm.environment.set(\"rentalUid\", response.rentalUid)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(() => {}, 30000);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"carUid\": \"{{carUid}}\",\n    \"dateFrom\": \"2021-10-08\",\n    \"dateTo\": \"2021-10-11\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/rental",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"rental"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Информация по конкретной аренде пользователя",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Получение информации по конкретной аренде пользователя\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const carUid = pm.environment.get(\"carUid\")",
+											"    const rentalUid = pm.environment.get(\"rentalUid\")",
+											"    const dateFrom = pm.environment.get(\"dateFrom\")",
+											"    const dateTo = pm.environment.get(\"dateTo\")",
+											"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.rentalUid).to.be.eq(rentalUid)",
+											"    pm.expect(response.status).to.be.eq(\"IN_PROGRESS\")",
+											"    pm.expect(response.dateFrom).to.be.eq(dateFrom)",
+											"    pm.expect(response.dateTo).to.be.eq(dateTo)",
+											"",
+											"    pm.expect(response.car).to.be.not.undefined",
+											"    pm.expect(response.car.carUid).to.be.eq(carUid)",
+											"    pm.expect(response.car.brand).to.be.eq(\"Mercedes Benz\")",
+											"    pm.expect(response.car.model).to.be.eq(\"GLA 250\")",
+											"    pm.expect(response.car.registrationNumber).to.be.eq(\"ЛО777Х799\")",
+											"",
+											"    pm.expect(response.payment).to.be.not.undefined",
+											"    pm.expect(response.payment.paymentUid).to.be.not.undefined",
+											"    pm.expect(response.payment.status).to.be.eq(\"PAID\")",
+											"    const days = Math.abs(moment(dateFrom).diff(moment(dateTo), \"days\"))",
+											"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
+											"",
+											"    pm.environment.set(\"rentalUid\", response.rentalUid)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/rental/:rentalUid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"rental",
+										":rentalUid"
+									],
+									"variable": [
+										{
+											"key": "rentalUid",
+											"value": "{{rentalUid}}",
+											"description": "UUID аренды"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn on Payment Service"
+				},
+				{
+					"name": "step3",
+					"item": [
+						{
+							"name": "[failover] Отмена аренды автомобиля",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Аренда отменена\", () => {",
+											"    pm.response.to.have.status(204)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/rental/:rentalUid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"rental",
+										":rentalUid"
+									],
+									"variable": [
+										{
+											"key": "rentalUid",
+											"value": "{{rentalUid}}",
+											"description": "UUID аренды"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "[failover] Информация по конкретной аренде пользователя",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Получение информации по конкретной аренде пользователя\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const carUid = pm.environment.get(\"carUid\")",
+											"    const rentalUid = pm.environment.get(\"rentalUid\")",
+											"    const dateFrom = pm.environment.get(\"dateFrom\")",
+											"    const dateTo = pm.environment.get(\"dateTo\")",
+											"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.rentalUid).to.be.eq(rentalUid)",
+											"    pm.expect(response.status).to.be.eq(\"CANCELED\")",
+											"    pm.expect(response.dateFrom).to.be.eq(dateFrom)",
+											"    pm.expect(response.dateTo).to.be.eq(dateTo)",
+											"",
+											"    pm.expect(response.car).to.be.not.undefined",
+											"    pm.expect(response.car.carUid).to.be.eq(carUid)",
+											"    pm.expect(response.car.brand).to.be.eq(\"Mercedes Benz\")",
+											"    pm.expect(response.car.model).to.be.eq(\"GLA 250\")",
+											"    pm.expect(response.car.registrationNumber).to.be.eq(\"ЛО777Х799\")",
+											"",
+											"    pm.expect(response.payment).to.be.empty",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/rental/:rentalUid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"rental",
+										":rentalUid"
+									],
+									"variable": [
+										{
+											"key": "rentalUid",
+											"value": "{{rentalUid}}",
+											"description": "UUID аренды"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn off Payment Service"
+				},
+				{
+					"name": "step4",
+					"item": [
+						{
+							"name": "[failover] Информация по конкретной аренде пользователя",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const moment = require(\"moment\")",
+											"",
+											"pm.test(\"Получение информации по конкретной аренде пользователя\", () => {",
+											"    pm.response.to.have.status(200)",
+											"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.contains(\"application/json\");",
+											"",
+											"    const carUid = pm.environment.get(\"carUid\")",
+											"    const rentalUid = pm.environment.get(\"rentalUid\")",
+											"    const dateFrom = pm.environment.get(\"dateFrom\")",
+											"    const dateTo = pm.environment.get(\"dateTo\")",
+											"    const rentalPrice = pm.environment.get(\"rentalPrice\")",
+											"",
+											"    const response = pm.response.json();",
+											"    pm.expect(response.rentalUid).to.be.eq(rentalUid)",
+											"    pm.expect(response.status).to.be.eq(\"CANCELED\")",
+											"    pm.expect(response.dateFrom).to.be.eq(dateFrom)",
+											"    pm.expect(response.dateTo).to.be.eq(dateTo)",
+											"",
+											"    pm.expect(response.car).to.be.not.undefined",
+											"    pm.expect(response.car.carUid).to.be.eq(carUid)",
+											"    pm.expect(response.car.brand).to.be.eq(\"Mercedes Benz\")",
+											"    pm.expect(response.car.model).to.be.eq(\"GLA 250\")",
+											"    pm.expect(response.car.registrationNumber).to.be.eq(\"ЛО777Х799\")",
+											"",
+											"    pm.expect(response.payment).to.be.not.undefined",
+											"    pm.expect(response.payment.paymentUid).to.be.not.undefined",
+											"    pm.expect(response.payment.status).to.be.eq(\"CANCELED\")",
+											"    const days = Math.abs(moment(dateFrom).diff(moment(dateTo), \"days\"))",
+											"    pm.expect(response.payment.price).to.be.eq(days * rentalPrice)",
+											"",
+											"    pm.environment.set(\"rentalUid\", response.rentalUid)",
+											"})"
+										],
+										"type": "text/javascript"
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"setTimeout(() => {}, 30000);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"description": "Имя пользователя",
+										"key": "X-User-Name",
+										"value": "{{username}}"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/api/v1/rental/:rentalUid",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"api",
+										"v1",
+										"rental",
+										":rentalUid"
+									],
+									"variable": [
+										{
+											"key": "rentalUid",
+											"value": "{{rentalUid}}",
+											"description": "UUID аренды"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"description": "Turn on Payment Service"
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.environment.set(\"carUid\", \"109b42f3-198d-4c89-9276-a7520a7120ab\")",
+							"pm.environment.set(\"username\", \"Test Max\")"
 						]
 					}
 				},
@@ -1030,7 +1572,7 @@
 	"variable": [
 		{
 			"key": "baseUrl",
-			"value": ""
+			"value": "http://localhost:8080"
 		},
 		{
 			"key": "carUid",

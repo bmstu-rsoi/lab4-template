@@ -29,18 +29,28 @@
 
 ### Пояснения
 
-Т.к. развертывание полноценного кластера на виртуальным машинах очень сложный процесс, можно использовать Managed
+1. Т.к. развертывание полноценного кластера на виртуальным машинах очень сложный процесс, можно использовать Managed
 Kubernetes Cluster, т.е. готовый кластер k8s, предоставляемый сторонней платформой, например:
+   * [Digital Ocean](https://www.digitalocean.com/products/kubernetes/)
+   * [Yandex Cloud](https://cloud.yandex.ru/services/managed-kubernetes)
+   * [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
+   * [AWS](https://aws.amazon.com/ru/eks/)
 
-* [Digital Ocean](https://www.digitalocean.com/products/kubernetes/)
-* [Yandex Cloud](https://cloud.yandex.ru/services/managed-kubernetes)
-* [Google Kubernetes Engine](https://cloud.google.com/kubernetes-engine)
-* [AWS](https://aws.amazon.com/ru/eks/)
-
-Платформ, которые предоставляют Kubernetes as a Service большое количество, вы можете сами исследовать рынок и выбрать
+2. Платформ, которые предоставляют Kubernetes as a Service большое количество, вы можете сами исследовать рынок и выбрать
 другого провайдера услуг. Большинство провайдеров имеют бесплатный триальный период или денежный грант.
 
-Для создания кластера достаточно 2-3 worker ноды 2Gb, 1CPU.
+3. Для создания кластера достаточно 2-3 worker ноды 2Gb, 1CPU.
+
+4. Для проверки отказоустойчивости используется остановка и запуск контейнеров docker, это делает
+   скрипт [test-script.sh](scripts/test-script.sh). Скрипт нужно запускать из корня проекта, т.к. он обращается к папке
+   postman по вариантам.
+   ```shell
+   # запуск тестового сценария:
+   # * <variant> – номер варианта (v1 | v2 | v3 | v4 )
+   # * <deployment> – имя deployment в кластере k8s
+   # * <namespace>    – namespace кластера, в котором развёрнуты сервисы (по умолчанию default)
+   $ ./scripts/test-script.sh <variant> <deployment> <k8s namespace>
+   ```
 
 ### Прием задания
 
